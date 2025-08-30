@@ -32,9 +32,7 @@ in {
   };
 
   config = mkIf (cfg.enable) ({
-    imports = [ <home-manager/nixos> ];
-
-    home-manager.users.${cfg.user}.home.stateVersion = "25.11";
+    home-manager.users.${cfg.user}.home.stateVersion = "25.05";
   }
   /* // gitConfig {
        pkgs = pkgs;
