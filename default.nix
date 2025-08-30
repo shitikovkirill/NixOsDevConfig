@@ -4,8 +4,6 @@ with lib;
 
 let
   cfg = config.services.devServerConfig;
-  home-manager = builtins.fetchTarball
-    "https://github.com/nix-community/home-manager/archive/refs/heads/release-25.11.tar.gz";
   #gitConfig = import ./git;
   #hConfig = import ./h;
 in {
@@ -34,15 +32,17 @@ in {
   };
 
   config = mkIf (cfg.enable) ({
-    include = [ (import "${home-manager}/nixos") ];
+    imports = [ <home-manager/nixos> ];
 
     home-manager.users.${cfg.user}.home.stateVersion = "25.11";
-  } 
-  /*// gitConfig {
-    pkgs = pkgs;
-    user = cfg.user;
-  } // hConfig {
-    pkgs = pkgs;
-    codePath = cfg.codePath;
-  }*/);
+  }
+  /* // gitConfig {
+       pkgs = pkgs;
+       user = cfg.user;
+     } // hConfig {
+       pkgs = pkgs;
+       codePath = cfg.codePath;
+     }
+  */
+  );
 }

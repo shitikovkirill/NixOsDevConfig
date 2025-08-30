@@ -1,6 +1,8 @@
 { pkgs, user, ... }:
 
 {
+  imports = [ <home-manager/nixos> ];
+
   environment.systemPackages = with pkgs; [ git git-crypt pre-commit ];
 
   home-manager.users.${user} = {
