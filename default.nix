@@ -4,6 +4,8 @@ with lib;
 
 let
   cfg = config.services.devServerConfig;
+  home-manager = builtins.fetchTarball
+    "https://github.com/nix-community/home-manager/archive/refs/heads/release-24.11.tar.gz";
   gitConfig = import ./git;
   hConfig = import ./h;
 in {
