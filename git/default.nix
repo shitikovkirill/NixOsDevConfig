@@ -1,13 +1,9 @@
-{ config, pkgs, user, ... }:
+{ pkgs, user, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    git
-    git-crypt
-    pre-commit
-  ];
+  environment.systemPackages = with pkgs; [ git git-crypt pre-commit ];
 
-  home-manager.users."${user}" = {
+  home-manager.users.${user} = {
     home = { file.".gitignore".source = ./gitignore.txt; };
 
     programs.git = {
