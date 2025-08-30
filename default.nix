@@ -4,8 +4,8 @@ with lib;
 
 let
   cfg = config.services.devServerConfig;
-  #gitConfig = import ./git;
-  #hConfig = import ./h;
+  gitConfig = import ./git;
+  hConfig = import ./h;
 in {
   options = {
     services.devServerConfig = {
@@ -32,15 +32,14 @@ in {
   };
 
   config = mkIf (cfg.enable) ({
-    home-manager.users.${cfg.user}.home.stateVersion = "25.05";
+
+  } // gitConfig {
+    pkgs = pkgs;
+    user = cfg.user;
+  } // hConfig {
+    pkgs = pkgs;
+    codePath = cfg.codePath;
   }
-  /* // gitConfig {
-       pkgs = pkgs;
-       user = cfg.user;
-     } // hConfig {
-       pkgs = pkgs;
-       codePath = cfg.codePath;
-     }
-  */
+
   );
 }
