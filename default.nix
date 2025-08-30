@@ -32,7 +32,7 @@ in {
   };
 
   config = mkIf (cfg.enable) ({
-
+    imports = [ ./aliases.nix ];
   } // gitConfig {
     pkgs = pkgs;
     user = cfg.user;
