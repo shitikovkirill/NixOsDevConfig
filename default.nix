@@ -35,11 +35,12 @@ in {
     include = [ (import "${home-manager}/nixos") ];
 
     home-manager.users.${cfg.user}.home.stateVersion = "25.11";
-  } // gitConfig {
+  } 
+  /*// gitConfig {
     pkgs = pkgs;
     user = cfg.user;
   } // hConfig {
     pkgs = pkgs;
     codePath = cfg.codePath;
-  });
+  }*/);
 }
