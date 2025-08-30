@@ -6,8 +6,8 @@ let
   cfg = config.services.devServerConfig;
   home-manager = builtins.fetchTarball
     "https://github.com/nix-community/home-manager/archive/refs/heads/release-25.11.tar.gz";
-  gitConfig = import ./git;
-  hConfig = import ./h;
+  #gitConfig = import ./git;
+  #hConfig = import ./h;
 in {
   options = {
     services.devServerConfig = {
