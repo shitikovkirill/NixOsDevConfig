@@ -1,25 +1,19 @@
-{ config, pkgs, ... }:
+{ config, pkgs, user, ... }:
 
 {
   environment.systemPackages = with pkgs; [
-    gitg
-    git-cola
     git
     git-crypt
-    gitAndTools.gitFull
-    gitAndTools.pre-commit
+    pre-commit
   ];
 
-  home-manager.users.kirill = {
-    home = {
-      file.".gitignore".source = ./dotfiles/git/gitignore;
-      #stateVersion = "22.11";
-    };
+  home-manager.users."${user}" = {
+    home = { file.".gitignore".source = ./gitignore.txt; };
 
     programs.git = {
       enable = true;
       userName = "Shitikov Kirill";
-      userEmail = "kirill.shitikov@powow.ai";
+      userEmail = "shitikovkirillt@gmail.com";
       extraConfig = {
         push = { default = "current"; };
         apply = { whitespace = "nowarn"; };
@@ -34,18 +28,8 @@
         url = {
           "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
           "ssh://git@gitlab.com/" = { insteadOf = "https://gitlab.com/"; };
-          "ssh://git@gitlab.pw/" = { insteadOf = "https://gitlab.pw/"; };
-          "ssh://gitlab@gitlab.server/" = {
-            insteadOf = "http://gitlab.server/";
-          };
-          "ssh://gitlab@lab.thinkglobal.space/" = {
-            insteadOf = "https://lab.thinkglobal.space/";
-          };
-          "ssh://gitlab@gitlab.thinkglobal.space/" = {
-            insteadOf = "https://gitlab.thinkglobal.space/";
-          };
-          "ssh://git@gitlab.evo.dev:" = {
-            insteadOf = "https://gitlab.evo.dev/";
+          "ssh://gitea@git.webwave.work/" = {
+            insteadOf = "https://git.webwave.work/";
           };
         };
       };
