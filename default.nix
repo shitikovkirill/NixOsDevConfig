@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.services.devServerConfig;
+  gitConfig = import ./git;
   hConfig = import ./h;
 in {
   options = {
@@ -15,6 +16,12 @@ in {
           Enable dev server.
         '';
       };
+      user = mkOption {
+        default = "nixos";
+        type = types.str;
+        description = "The default username for your system.";
+        example = "exampleUser";
+      };
       codePath = mkOption {
         default = "~/Development";
         type = types.str;
@@ -25,7 +32,12 @@ in {
   };
 
   config = mkIf (cfg.enable) ({
-    include = [ ./git ];
+    include = [ (import "${home-manager}/nixos") ];
+
+    home-manager.users.${cfg.user}.home.stateVersion = "25.11";
+  } // gitConfig {
+    pkgs = pkgs;
+    user = cfg.user;
   } // hConfig {
     pkgs = pkgs;
     codePath = cfg.codePath;
