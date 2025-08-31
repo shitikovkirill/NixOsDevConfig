@@ -1,6 +1,8 @@
-{ pkgs, codePath, ... }:
+{ config, pkgs, ... }:
 
 let
+  cfg = config.custom.devServerConfig;
+  codePath = cfg.codePath;
   hInit = ''
     eval "$(h --setup ${codePath})"
   '';

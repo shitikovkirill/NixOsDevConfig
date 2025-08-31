@@ -1,6 +1,9 @@
-{ pkgs, user, ... }:
+{ config, pkgs, ... }:
 
-{
+let
+  cfg = config.custom.devServerConfig;
+  user = cfg.user;
+in {
   environment.systemPackages = with pkgs; [ git git-crypt pre-commit ];
 
   home-manager.users.${user} = {

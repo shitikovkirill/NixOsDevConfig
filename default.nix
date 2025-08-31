@@ -3,19 +3,12 @@
 with lib;
 
 let
-  cfg = config.services.devServerConfig;
+  cfg = config.custom.devServerConfig;
   user = cfg.user;
   codePath = cfg.codePath;
 in {
   options = {
-    services.devServerConfig = {
-      enable = mkOption {
-        default = false;
-        type = types.bool;
-        description = ''
-          Enable dev server.
-        '';
-      };
+    custom.devServerConfig = {
       user = mkOption {
         default = "nixos";
         type = types.str;
@@ -33,7 +26,5 @@ in {
 
   imports = [ ./git ./h ./aliases.nix ];
 
-  config = mkIf (cfg.enable) {
 
-  };
 }
