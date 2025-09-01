@@ -24,7 +24,6 @@ in {
     };
   };
 
-  imports = [ ./git ./h ./aliases.nix ];
-
-
+  imports = [ ./git ./h ./vs_code ./aliases.nix ];
+  
 }
