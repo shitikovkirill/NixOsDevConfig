@@ -1,6 +1,9 @@
 { config, pkgs, lib, ... }:
 
-{
+let
+  cfg = config.custom.devServerConfig;
+  user = cfg.user;
+in {
   environment.systemPackages = with pkgs; [ direnv nix-direnv ];
 
   programs = {
@@ -25,7 +28,7 @@
   '';
   environment.pathsToLink = [ "/share/nix-direnv" ];
 
-  home-manager.users.kirill = {
+  home-manager.users.${user} = {
     home = { file.".direnvrc".source = ./direnvrc; };
   };
 }
